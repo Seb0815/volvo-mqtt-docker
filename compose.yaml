@@ -1,0 +1,30 @@
+services:
+  volvo-mqtt:
+    build: .
+    restart: unless-stopped
+    init: true
+    env_file: .env
+    environment:
+      TOKEN_FILE: /data/tokens.json
+      AUTH_BIND_HOST: 0.0.0.0
+      DASHBOARD_BIND_HOST: 0.0.0.0
+    volumes:
+      - volvo-data:/data
+    ports:
+      - "127.0.0.1:8080:8080"
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    stop_grace_period: 60s
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "3"
+
+volumes:
+  volvo-data:

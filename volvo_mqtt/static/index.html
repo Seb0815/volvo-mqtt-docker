@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Volvo EX30 | Fahrzeugstatus</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/dashboard.css">
+  <script src="/dashboard.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Volvo EX30 Dashboard">VOLVO <span> / EX30</span></a>
+      <span class="badge" id="connection">Verbinde mit Dashboard</span>
+    </header>
+
+    <section class="intro">
+      <div>
+        <p class="eyebrow">DEIN FAHRZEUG. AUF EINEN BLICK.</p>
+        <h1>Alles im Blick.</h1>
+        <p class="subtitle">Fahrzeugdaten und der Weg in dein Smarthome.</p>
+      </div>
+      <div class="vehicle-id"><span>FAHRZEUG-ID</span><strong id="vin">Warte auf Fahrzeug</strong></div>
+    </section>
+
+    <div class="notice" id="notice" role="status">Warte auf den ersten Statusabruf.</div>
+
+    <section class="metrics" aria-label="Fahrzeugdaten">
+      <article class="card battery-card">
+        <div class="card-top"><h2>Batterie</h2><span class="metric-symbol" aria-hidden="true">+</span></div>
+        <p class="metric" id="battery">--</p>
+        <progress id="battery-progress" max="100" value="0" aria-label="Akkustand"></progress>
+        <p class="measurement-note" id="battery-time">Noch keine Messung</p>
+      </article>
+      <article class="card">
+        <div class="card-top"><h2>Reichweite</h2><span class="metric-symbol" aria-hidden="true">&#8599;</span></div>
+        <p class="metric" id="range">--</p>
+        <p class="metric-description">Elektrische Restreichweite</p>
+        <p class="measurement-note" id="range-time">Noch keine Messung</p>
+      </article>
+      <article class="card">
+        <div class="card-top"><h2>Ladestatus</h2><span class="metric-symbol" aria-hidden="true">&#9889;</span></div>
+        <p class="metric charging" id="charging">--</p>
+        <p class="metric-description" id="cable">Kabelstatus unbekannt</p>
+        <p class="measurement-note" id="charging-time">Noch keine Messung</p>
+      </article>
+      <article class="card">
+        <div class="card-top"><h2>Kilometerstand</h2><span class="metric-symbol" aria-hidden="true">&#8594;</span></div>
+        <p class="metric" id="odometer">--</p>
+        <p class="metric-description">Gesamte Fahrstrecke</p>
+        <p class="measurement-note" id="odometer-time">Noch keine Messung</p>
+      </article>
+    </section>
+
+    <section class="details-grid">
+      <article class="panel">
+        <div class="panel-heading"><h2>Deine Verbindung</h2><span class="eyebrow">VOLVO &rarr; MQTT</span></div>
+        <dl class="status-list">
+          <div><dt>MQTT-Broker</dt><dd id="mqtt">Warte auf Verbindung</dd></div>
+          <div><dt>Energy API</dt><dd id="energy-status">Noch nicht abgefragt</dd></div>
+          <div><dt>Kilometerstand API</dt><dd id="odometer-status">Noch nicht abgefragt</dd></div>
+          <div><dt>Letzte MQTT-Uebertragung</dt><dd id="last-publish">--</dd></div>
+          <div><dt>MQTT-Basistopic</dt><dd class="monospace" id="topic">--</dd></div>
+        </dl>
+      </article>
+      <article class="panel">
+        <div class="panel-heading"><h2>Aktualisierung</h2><span class="live-dot" aria-hidden="true"></span></div>
+        <dl class="status-list">
+          <div><dt>Letzter Abrufversuch</dt><dd id="last-attempt">--</dd></div>
+          <div><dt>Letzter kompletter Erfolg</dt><dd id="last-success">--</dd></div>
+          <div><dt>Naechster Abruf</dt><dd id="next-attempt">--</dd></div>
+          <div><dt>API-Abfrageintervall</dt><dd id="interval">--</dd></div>
+          <div><dt>Dashboard aktualisiert</dt><dd id="dashboard-time">--</dd></div>
+        </dl>
+      </article>
+    </section>
+
+    <section class="panel error-panel" id="errors-panel" hidden aria-labelledby="errors-title">
+      <h2 id="errors-title">Hinweise &amp; Fehler</h2>
+      <ul id="errors"></ul>
+    </section>
+
+    <details class="panel raw-panel">
+      <summary>Messwerte im Detail <span>Originalwerte, Einheiten &amp; Zeitstempel</span></summary>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Messwert</th><th>Wert</th><th>Status</th><th>Messzeit</th></tr></thead>
+          <tbody id="measurements"><tr><td colspan="4">Noch keine Daten vorhanden.</td></tr></tbody>
+        </table>
+      </div>
+    </details>
+
+    <footer>
+      <span>READ-ONLY BRIDGE <span class="footer-separator">/</span> Keine Fahrzeugsteuerung</span>
+      <span>Dashboard alle 5 Sekunden &middot; Volvo-Daten gemaess Abfrageintervall</span>
+    </footer>
+    <noscript><p class="notice">Bitte JavaScript aktivieren, um den aktuellen Status zu laden.</p></noscript>
+  </main>
+</body>
+</html>
